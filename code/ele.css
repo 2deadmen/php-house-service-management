@@ -18,8 +18,9 @@
     width: 100%;
 }
 body{
-    background-color: rgb(31, 171, 246);
-    overflow-y: scroll;
+    overflow-y: auto !important;
+    font-size: large !important;
+    font-weight: 600 !important;
 }
 .subhead{
     font-weight: 600;

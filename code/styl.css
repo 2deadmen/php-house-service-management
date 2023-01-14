@@ -6,7 +6,11 @@
   }
   body{
     font-family: sans-serif;
-    overflow: hidden;
+  
+      overflow-y: auto !important;
+      font-size: large !important;
+      font-weight: 600 !important;
+
     user-select: none;
   }
   nav .logo{
