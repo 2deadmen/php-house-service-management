@@ -48,7 +48,7 @@
       </nav>
     <div class='painter'>
         
-   <h1 align='center' class='py-5 head' >
+   <h1 align='center' class='py-3 head' >
   <span style='color: blue'>P</span>
   <span style='color: red'>A</span>
   <span style='color: yellow'>I</span>
@@ -59,10 +59,10 @@
 
 
 </h1>
-      <h3 align='center ' class='subhead'>The Painters are the ones who bring colors to our home and life</h3>
+      <h2 align='center ' style='color:purple' class='subhead'><b>The Painters are the ones who bring colors to our home and life</b></h2>
     </div>
     <div class='table my-5'>
-        <h3 align='center'>The Painters available</h3>
+        <h3 align='center'><b>The Painters available</b></h3>
    
 
         <?php

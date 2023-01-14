@@ -50,7 +50,7 @@ require('session.php');
       </nav>
     <div class='painter'>
         
-   <h1 align='center' class='py-5 head' >
+   <h1 align='center' class='py-3 head' >
   <span >E</span>
   <span>L</span>
   <span >E</span>
@@ -66,10 +66,10 @@ require('session.php');
 
 
 </h1>
-      <h3 align='center' style='color:blue;'class='subhead'>The Electricians are the ones who bring light to our home and life</h3>
+      <h2 align='center' style='color:yellow;'class='subhead'><b>The Electricians are the ones who bring light to our home and life</b></h2>
     </div>
     <div class='table my-5'>
-        <h3 align='center'>The Electricians available</h3>
+        <h3 align='center'><b>The Electricians available</b></h3>
 
 
 <?php
