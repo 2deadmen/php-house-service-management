@@ -35,11 +35,15 @@
                  <li><a href="Homecleaners.php">Homecleaners</a></li>
                  </ul>
                  </li>
+                 </li>
                  <li><a href='<?php
-                  if(isset($_SESSION['worker']))
+                if($_SESSION['user']=='admin'){
+                  echo "admin.php";
+                }
+                 else if(isset($_SESSION['worker']))
                  {echo "services.php"; }
                  else{
-                   echo "cust_services.php";} ?>'>Request status</a></li>
+                   echo "cust_services.php";} ?>'> status</a></li>
                  <li><a href="logout.php">Logout</a></li>
                  <!-- <li><a href="login.php">login</a></li>
                  <li><a href="register.php">registration</a></li> -->
