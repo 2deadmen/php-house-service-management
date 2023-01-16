@@ -29,7 +29,7 @@
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Phone number</label>
-    <input type="tel" name='Phone_no' class="form-control"  minlength=10 placeholder="Enter your phone number" required>
+    <input type="number" name='Phone_no' class="form-control"  minlength=10 placeholder="Enter your phone number" required>
   </div>
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" required class="form-control" name='email' id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -37,7 +37,7 @@
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" required class="form-control" name='password'  id='pass' placeholder="Password">
+    <input type="password" required class="form-control" name='password' minlength='8'  id='pass' placeholder="Password">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Address</label>
