@@ -34,14 +34,62 @@
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" required class="form-control" name='password' minlength='8'  id='pass' placeholder="Password">
+    <input type="password"  onkeyup='passwordChanged()' onblur='removestyle()' required class="form-control" name='password' minlength='8'  id='pass' placeholder="Password">
+    <small id='strength'></small>
+    <p id='StrengthDisp'></p>
+    <input type="checkbox" onclick='handleshowpass()'/>show password
   </div>
  
   
   <input name='submit' type='submit' value='submit'  class="btn btn-primary">
   <br><small><a href="register.php">are you a customer?register here</a><br><a href="worker_login.php">already have an account?</a></small>
 </form>
+<script language="javascript">
+    function passwordChanged() {
+        var strength = document.getElementById('strength');
+        var strongRegex = new RegExp("^(?=.{14,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+        var mediumRegex = new RegExp("^(?=.{10,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+        var enoughRegex = new RegExp("(?=.{8,}).*", "g");
+        var pwd = document.getElementById("pass");
+        if (pwd.value.length == 0) {
+            strength.innerHTML = '';
+        } else if (false == enoughRegex.test(pwd.value)) {
+            strength.innerHTML = 'Give atleast 8 Characters';
+        } else if (strongRegex.test(pwd.value)) {
+            strength.innerHTML = '<span style="color:green">Strong!</span>';
+            pwd.style.cssText=" box-shadow: 0 1px 5px 0 green"
+
+        } else if (mediumRegex.test(pwd.value)) {
+            strength.innerHTML = '<span style="color:orange">Medium!A combination of special characters and symbols</span>';
+            pwd.style.cssText=" box-shadow:0 1px 5px 0  orange"
+            
+        } else {
+            strength.innerHTML = '<span style="color:red">Weak! Use combination of uppercase letters, lowercase letters, numbers, and symbols</span>';
+          pwd.style.cssText=" box-shadow:0 1px 5px 0 red";
+        }
+    }
+
+    const removestyle=()=>{
+    var pwd = document.getElementById("pass");
+    pwd.style.cssText=" box-shadow:0 0 white"
+
+  }
+ 
+
+    function handleshowpass(){
+  var x = document.getElementById("pass");
   
+  if(x.type==="password"){
+    x.type="text";
+  
+  }
+  else{
+    x.type="password";
+  
+  }
+  }
+
+</script>
 </body>
 <?php
 if(isset($_POST['submit'])){

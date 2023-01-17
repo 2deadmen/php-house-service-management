@@ -42,7 +42,7 @@
 </div>
 <div class="form-group">
     <label for="exampleInputPassword1">Phone number</label>
-    <input type="number" name='Phone_no' class="form-control"  minlength=10 placeholder="Enter your phone number" required>
+    <input type="tel" name='Phone_no' class="form-control"  pattern="^\d{10}$"  placeholder="Enter your phone number" required>
   </div>
 <div class="form-group">
     <label for="exampleInputPassword1">Expertise</label>
