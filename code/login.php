@@ -15,14 +15,22 @@
             background-repeat: no-repeat;
             background-size: cover;
 		}
+		.grid{
+			display:grid;
+			grid-template-columns: 2fr 1fr;
+
+		}
+	
+
 
 	</style>
 </head>
 <body>
+<div class="container my-5 grid">	
 <div class="container">
 <h1 align='center' class='my-2'>WELCOME</h1>  
-<button class='btn btn-primary' style='float:right'><a style='color:white' href="adminlogin.php">Admin login</a></button>
-<form class='container my-5 w-50' action='' method='post'>
+
+<form class='container my-5 w-75 ' action='' method='post'>
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control" name='email' id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -34,9 +42,16 @@
   </div>
   
   <button type="submit" name='submit' class="btn btn-primary">Submit</button><br>
-  <small><a href="worker_login.php">are you a worker..?login here</a> <br>
-  <a href="register.php">new user?register here</a></small>
-</form></div>
+ 
+</form></div> 
+<div class="container my-5 py-5" style='float:right'>
+<br> <br>	
+<button class='btn btn-primary' style='float:right'><a style='color:white' href="adminlogin.php">Admin login</a></button> <br> <br>
+<button class='btn btn-primary' style='float:right'> <a  style='color:white' href="register.php">new user?register here</a></button> <br> <br>
+ <button class='btn btn-primary' style='float:right'><a style='color:white'	 href="worker_login.php">are you a worker..?login here</a></button> <br> <br>
+	</div>
+</div>
+
 
 </body>  
 <?php

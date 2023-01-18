@@ -13,6 +13,7 @@
 			background-image: url('back2.jpg');
             background-repeat: no-repeat;
             background-size: cover;
+            backdrop-filter:blur(5px);
 		}
 
 	</style>   

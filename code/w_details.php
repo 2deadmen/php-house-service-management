@@ -14,6 +14,7 @@
 			background-image: url('back4.jpg');
             background-repeat: no-repeat;
             background-size: cover;
+            
 		}
 
 	</style>
