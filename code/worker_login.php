@@ -15,15 +15,21 @@
             background-size: cover;
    
 		}
+    .grid{
+			display:grid;
+			grid-template-columns: 2fr 1fr;
+
+		}
 
 	</style>    
 <title>Login</title>
 </head>
 <body>
-<div class="container">
-<h1 align='center' class='my-2'>WELCOME</h1> 
+<div class="container"><h1 align='center' class='my-2'>WELCOME</h1> 
 <h4 align='center'calss='my-3'> Worker Login</h4> 
-<form class='container my-5 w-50' action='loginprocess.php' method='post'>
+<div class="container grid">
+
+<form class='container my-5 w-75' action='loginprocess.php' method='post'>
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control" name='email' id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -31,15 +37,17 @@
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" name='password' minlength='8' id="exampleInputPassword1" placeholder="Password">
+    <input type="password" class="form-control" name='password' maxlength='15' minlength='8' id="exampleInputPassword1" placeholder="Password">
   </div>
   
   <button type="submit" name='submit' class="btn btn-primary">Submit</button><br>
-  <small><a href="login.php">are you a customer..?login here</a> <br>
-  <a href="w_register.php">new user?register here</a></small>
 
 
-</form></div>
+</form>
+
+<div class="container"> <br><br><br><small class='btn btn-primary my-2'><a style='color:white' href="login.php">are you a customer..?login here</a></small> <br>
+<small class='btn btn-primary'><a style='color:white' href="w_register.php">new user?register here</a></small></div>
+</div>
   
 </body>
 </html>

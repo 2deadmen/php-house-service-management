@@ -13,7 +13,13 @@
 			background-image: url('back2.jpg');
             background-repeat: no-repeat;
             background-size: cover;
-            backdrop-filter:blur(5px);
+     
+		}
+    
+    .grid{
+			display:grid;
+			grid-template-columns: 2fr 1fr;
+
 		}
 
 	</style>   
@@ -22,7 +28,8 @@
 <body>
    
     <h1 class='my-3' align='center'>Registration</h1>
-<form class='container my-4 w-50' id='myform' action='' method='post'>
+   <div class="container grid"> <div class="container">
+<form class='container my-4 w-75' id='myform' action='' method='post'>
   <div class="form-group">
   <div class="form-group">
     <label for="exampleInputPassword1">Name</label>
@@ -38,7 +45,7 @@
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" required class="form-control" onkeyup='passwordChanged()' onblur='removestyle()' name='password' minlength='8'  id='pass' placeholder="Password">
+    <input type="password" required class="form-control" maxlength='15' onkeyup='passwordChanged()' onblur='removestyle()' name='password' minlength='8'  id='pass' placeholder="Password">
     <small id='strength'></small>
     <p id='StrengthDisp'></p>
     <input type="checkbox" onclick='handleshowpass()'/>show password
@@ -52,12 +59,14 @@
  
   
   <input name='submit' type='submit' value='submit'  class="btn btn-primary">
-  <br><b><small><a href="w_register.php">are you a worker?register here</a><br><a href="login.php">already have an account?</a></small></b>
-</form>
+
+</form></div>
+
+<div class="container">  <br> <br><b><small  class='btn btn-primary my-2'><a style='color:white' href="w_register.php">are you a worker?register here</a></small><br><small  class='btn btn-primary'><a style='color:white' href="login.php">already have an account?</a></small></b></div></div>
 <script language="javascript">
     function passwordChanged() {
         var strength = document.getElementById('strength');
-        var strongRegex = new RegExp("^(?=.{14,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+        var strongRegex = new RegExp("^(?=.{11,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
         var mediumRegex = new RegExp("^(?=.{10,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
         var enoughRegex = new RegExp("(?=.{8,}).*", "g");
         var pwd = document.getElementById("pass");

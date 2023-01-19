@@ -26,11 +26,10 @@
 	</style>
 </head>
 <body>
-<div class="container my-5 grid">	
+<h1 align='center' class='my-5'>WELCOME</h1> 
+<div class="container grid">	
 <div class="container">
-<h1 align='center' class='my-2'>WELCOME</h1>  
-
-<form class='container my-5 w-75 ' action='' method='post'>
+<form class='container  w-75 ' action='' method='post'>
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control" name='email' id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -38,14 +37,14 @@
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" name='pass' minlength='8' id="exampleInputPassword1" placeholder="Password">
+    <input type="password" class="form-control" name='pass' maxlength='15' minlength='8' id="exampleInputPassword1" placeholder="Password">
   </div>
   
   <button type="submit" name='submit' class="btn btn-primary">Submit</button><br>
  
 </form></div> 
-<div class="container my-5 py-5" style='float:right'>
-<br> <br>	
+<div class="container  py-5" style='float:right'>
+	
 <button class='btn btn-primary' style='float:right'><a style='color:white' href="adminlogin.php">Admin login</a></button> <br> <br>
 <button class='btn btn-primary' style='float:right'> <a  style='color:white' href="register.php">new user?register here</a></button> <br> <br>
  <button class='btn btn-primary' style='float:right'><a style='color:white'	 href="worker_login.php">are you a worker..?login here</a></button> <br> <br>
