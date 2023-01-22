@@ -24,7 +24,9 @@
 	</style>
 </head>
 <body>
-   
+<?php
+session_start();
+?>   
     <h1 class='my-3' align='center'>Worker Registration</h1>
     <div class="container grid"><div class="container">
 <form class='container my-4 w-75' id='myform' action='' method='post'>
@@ -98,8 +100,9 @@
   }
 
 </script>
-</body>
+
 <?php
+
 if(isset($_POST['submit'])){
 
 require('../db_connect/database.php');
@@ -123,17 +126,20 @@ if($conn->connect_error)
 	  location.href='w_register.php';
 </script>";
 	  }else{
-        $sql2 ="INSERT INTO `registration`( `uname`,  `email`, `psw`) VALUES ('$uname','$email','$psw')";
+        $sql2 ="INSERT INTO `registration`( `uname`,`email`,`psw`) VALUES ('$uname','$email','$psw')";
+       
         if($conn->query($sql2)===TRUE)
-		 {
-      session_start();
+		 { 
       $_SESSION['email']=$email;
-      echo"<script language='javascript'>
+      
+      echo "<script language='javascript'>
       location.href='w_details.php';
-  </script>";
+  </script>"; 
+     
      }}}}
+     ob_flush();
 ?>
 
     
-
+</body>
 </html>

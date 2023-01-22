@@ -14,13 +14,14 @@
 			background-image: url('back4.jpg');
             background-repeat: no-repeat;
             background-size: cover;
-            
 		}
 
 	</style>
 </head>
 <body>  
-   
+<?php
+session_start();
+?>     
     <h1 class='my-3' align='center'>Worker Portfolio</h1>
 <form class='container my-4 w-50' id='myform' action='' method='post'>
   <div class="form-group">
@@ -57,6 +58,7 @@
   
 </body>
 <?php
+
 if(isset($_POST['submit'])){
 
 require('../db_connect/database.php');
@@ -72,8 +74,7 @@ if($conn->connect_error)
 	  }
 	else
 	  {
-      session_start();
-        $email = $_SESSION['email'];
+      $email = $_SESSION['email'];
       $sql1="SELECT `regid` FROM `registration` where `email`='$email'";
       $result = $conn->query($sql1);
        if($result->num_rows>0)//when db records are found store in associative array...
@@ -82,15 +83,13 @@ if($conn->connect_error)
   
       while($row = $result->fetch_assoc())
        {
-     
           $worker_id=$row['regid'];
        }}
 
         $sql2 ="INSERT INTO `worker`( `worker_id`,`worker_name`,`phone`, `worker_exp`, `worker_expertise`, `worker_cat`) VALUES ('$worker_id','$uname','$contact','$exp','$expertise','$cat')";
         if($conn->query($sql2)===TRUE)
 		 {
-      echo"<script language='javascript'>
-
+      echo "<script language='javascript'>
       location.href='worker_login.php';
   </script>";
      }}}
