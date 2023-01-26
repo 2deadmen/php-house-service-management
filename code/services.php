@@ -55,22 +55,25 @@
 </h1>
     </div>
     <div class='table my-5'>
-        <h3 align='center'>The Services requested</h3>
+      
    
 
         <?php
         require('../db_connect/database.php');
         
-        $sql="SELECT * FROM `request table` where `worker_id`=".$_SESSION['worker']." AND (`status`='pending' or `status`='accepted') order by `request_date`;";
+        $sql="SELECT * FROM `request table` where `worker_id`=".$_SESSION['worker']."  order by `request_date`;";
 
         $result = $conn->query($sql);
 		 if($result->num_rows>0)//when db records are found store in associative array...
         {
 		  // output data of each row
-    
-  echo '<div class="row"> ';
+      $rownum=0;
+      echo "<table class='container tabl'  border='1px' >";
+     echo "<th colspan='10' style='border-bottom:solid 1px;'> <h3 align='center'><b>  <h3 align='center'>The Services requested</h3></b></h3></th>";   
+    echo '<div class="row"> ';
 	  while($row = $result->fetch_assoc())
-	   {
+	   {      $rownum+=1;
+
 
         $sql="SELECT * FROM `customer` where `customer_id`=".$row['customer_id'];
         $result1 =$conn->query($sql);
@@ -81,26 +84,28 @@
           $contact=$row1['customer_contact'];
           $address=$row1['customer_address'];
         }}
+        echo "<tr>";echo "<td>".$rownum."</td>";
      
-  echo '<div class="col-md-4">   <div class="card m-5" style="width: 18rem;">
+  echo '<div class="col-md-4">   <div class="   " style="width: 18rem;">
       <div class="card-body">
-      <h6 class="text-disabled" id="btns">'.$row['status'].'</h6>
-        <h5 class="card-title">'.$cust_name.'</h5>
-       <img src="icon.png" width="30px" height="30px"/><a href="tel:'.$contact.'" class="card-link"> '.$contact.'</a>
-        <h6 class="card-text disabled">'.$address.'</h6>
-        <h6 class="card-title">Work requested is </h6>
-        <p class="card-text">'.$row['description'].'</p>
+      <td><h6 class="text-disabled" id="btns">'.$row['status'].'</h6></td>
+      <td>   <h5 class="card-title">'.$cust_name.'</h5></td>
+      <td class="phone">  <img src="icon.png" width="30px" height="30px"/><a href="tel:'.$contact.'" class="card-link"> '.$contact.'</a></td>
+      <td>   <h6 class="card-text disabled">'.$address.'</h6></td>
+        
+        <td>  <p class="card-text">'.$row['description'].'</p></td>
 
-        <h6 class="card-title"> was requested on '.$row['request_date'].'</h6>
+        <td>  <h6 class="card-title"> was requested on '.$row['request_date'].'</h6></td>
       </div>
-        <button onclick="update(1,'.$row['request_id'].')" type="submit" class="btn btn-success">Accept</button>
-        <button onclick="update(2,'.$row['request_id'].')" type="submit" class="btn btn-danger my-1">Reject</button>
-        <button onclick="update(3,'.$row['request_id'].')" type="submit" class="btn btn-primary">keep it pending</button>
+      <td>    <button onclick="update(1,'.$row['request_id'].')" type="submit" class="btn btn-success">Accept</button></td>
+      <td>  <button onclick="update(2,'.$row['request_id'].')" type="submit" class="btn btn-danger my-1">Reject</button></td>
+      <td>   <button onclick="update(3,'.$row['request_id'].')" type="submit" class="btn btn-primary">keep it pending</button></td>
 
       </div>
     </div>';
+    echo "</tr>";
 	   }
-    echo "</div>";
+    echo "</div><table>";
     }
 
    

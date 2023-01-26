@@ -22,7 +22,7 @@
 <?php
 session_start();
 ?>     
-    <h1 class='my-3' align='center'>Worker Portfolio</h1>
++    <h1 class='my-3' align='center'>Worker Portfolio</h1>
 <form class='container my-4 w-50' id='myform' action='' method='post'>
   <div class="form-group">
   <div class="form-group">

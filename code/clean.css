@@ -28,3 +28,12 @@ body{
 a{
     text-decoration: none !important;
 }
+.tabl{
+    text-align:center !important;
+    background-color: powderblue;
+    box-shadow: 15px 15px 15px -15px #0F393A;
+
+}
+ .phone {
+    width: 180px;
+}

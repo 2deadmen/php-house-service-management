@@ -63,71 +63,105 @@ require('session.php');
       <h2 align='center' style='color:blue;' class='subhead'><b>The Cooks are the ones who bring taste to our home and life</b></h2>
     </div>
     <div class='table my-5'>
-        <h3 align='center'><b>The Cooks available</b></h3>
- 
-
-<?php
-        require('../db_connect/database.php');
-        
-		$sql1="SELECT * FROM `worker` where `worker_cat`='3'";
-		$result = $conn->query($sql1);
-		 if($result->num_rows>0)//when db records are found store in associative array...
+        <div class='table my-5'>
+       
+   
+       <div class="container ">
+     <div>
+     <button style='float:right' class='btn my-2 btn-primary'>search</button><input placeholder='search here...'  type="search" id="form1" class=" w-50  form-control m-2" onkeyup='search()' style='float:right' /> 
+   
+   <div id='hint'></div>
+   
+     </div>
+     <script>
+       function search(){
+         let str=document.getElementById('form1').value
+         if(str==""){
+             document.getElementById('hint').innerHTML=""
+             exit()
+           }
+         var xmlhttp = new XMLHttpRequest();
+           xmlhttp.onreadystatechange = function() 
+           {
+               if (this.readyState == 4 && this.status == 200) 
+               {
+                   document.getElementById("hint").innerHTML = this.responseText;
+               }
+           };
+           xmlhttp.open("GET", "searchcook.php?q=" + str, true);
+           xmlhttp.send();
+       }
+     </script>
+   
+   </div>
+           <?php
+           require('../db_connect/database.php');
+           
+       $sql1="SELECT * FROM `worker` where `worker_cat`='3'";
+       $result = $conn->query($sql1);
+        if($result->num_rows>0)//when db records are found store in associative array...
+           {
+         // output data of each row
+       $rownum=0;
+       echo "<table class='container tabl'  border='1px' >";
+      echo "<th colspan='8' style='border-bottom:solid 1px;'> <h3 align='center'><b>The Cooks available</b></h3></th>";   
+     echo '<div class="row"> ';
+       while($row = $result->fetch_assoc())
         {
-		  // output data of each row
-    
-  echo '<div class="row"> ';
-	  while($row = $result->fetch_assoc())
-	   {
-      $sql="SELECT `ratings` FROM `rating_table` where `customer_id`=".$row['worker_id'];
-      $result1 =$conn->query($sql);
-      $count=0;
-      $sum=0;
-      $star=0;
-      if($result->num_rows>0)//when db records are found store in associative array...
-        {
-      while($row1= $result1->fetch_assoc()){
-        $sum+=$row1['ratings'];
-        $count=$count+1;
-      }
-    if($count>0){
-      $star=$sum/$count;
-      $star=round($star,1);
-      $star=$star." star worker";
-     }
-     else{
-      $star="no reviews yet";
-     }
-}
+         $rownum+=1;
+         $sql="SELECT `ratings` FROM `rating_table` where `customer_id`=".$row['worker_id'];
+         $result1 =$conn->query($sql);
+         $count=0;
+         $sum=0;
+         $star=0;
+         if($result->num_rows>0)//when db records are found store in associative array...
+           {
+         while($row1= $result1->fetch_assoc()){
+           $sum+=$row1['ratings'];
+           $count=$count+1;
+         }
+       if($count>0){
+         $star=$sum/$count;
+         $star=round($star,1);
+         $star=$star." star worker";
+        }
+        else{
+         $star="no reviews yet";
+        }
+   }
+   echo "<tr>";
+   echo "<td>".$rownum."</td>";
+     echo '<div class="col-md-4">   <div class="" style="width: 18rem;">
+         <div class="-body">
+          <td> <h5 class="card-title">'.$row['worker_name'].'</h5> </td>
+          <td>    <h6  style="color:#D7BE69" class="card-subtitle mb-2 ">'.$star.' </h6></td>
+          <td>  <h6 class="card-subtitle mb-2 text-muted">'.$row['worker_exp'].' years experience</h6> </td>
+          <td>   <p class="card-text">'.$row['worker_expertise'].'</p> </td>
+          <td class="phone">   <img src="icon.png" width="30px" height="30px"/><a href="tel:'.$row['phone'].'" class="card-link phone"> '.$row['phone'].'</a></td>
+         <br>';
+         if(!isset($_SESSION['worker']))
+         { 
+         echo ' <small><td><form action="rate.php" method="post">
+         <input name="id" value='.$row['worker_id'].' style="display:none">
+         <input type="submit" name="submit" value="Rate this worker" class="btn-primary btn my-2">
+         </form></td>
+         <td><form action="request.php" method="post">
+         <input name="w_id" value='.$row['worker_id'].' style="display:none">
+         <input name="w_cat" value='.$row['worker_cat'].' style="display:none">
+         <input type="submit" name="submit1" value="Request service" class="btn-primary btn my-2">
+         </form></td></small>';
+         }
+         
+         echo '  
+         </div></div>
+       </div>';
+       echo "</tr>";
+        }
+       echo "</div><table>";
+       }
+   
       
-echo '<div class="col-md-4">   <div class="card m-5" style="width: 18rem;">
-<div class="card-body">
-  <h5 class="card-title">'.$row['worker_name'].'</h5>
-  <h6  style="color:#D7BE69" class="card-subtitle mb-2 ">'.$star.' </h6>
-  <h6 class="card-subtitle mb-2 text-muted">'.$row['worker_exp'].' years experience</h6>
-  <p class="card-text">'.$row['worker_expertise'].'</p>
-  <img src="icon.png" width="30px" height="30px"/><a href="tel:'.$row['phone'].'" class="card-link"> '.$row['phone'].'</a>
-<br>';
-if(!isset($_SESSION['worker']))
-{ 
-echo '<small><form action="rate.php" method="post">
-<input name="id" value='.$row['worker_id'].' style="display:none">
-<input type="submit" name="submit" value="Rate this worker" class="btn-primary btn my-2">
-</form>
-<form action="request.php" method="post">
-<input name="w_id" value='.$row['worker_id'].' style="display:none">
-<input name="w_cat" value='.$row['worker_cat'].' style="display:none">
-<input type="submit" name="submit1" value="Request service" class="btn-primary btn my-2">
-</form></small>';
-}
-
-echo '  
-</div></div>
-</div>';
-}
-echo "</div>";
-}
-
-        ?>
+           ?>
     </div>
 </body>
 </html>

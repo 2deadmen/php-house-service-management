@@ -58,7 +58,6 @@
 </h1>
     </div>
     <div class='table my-5'>
-        <h3 align='center'>The services requested</h3>
    
 
         <?php
@@ -70,11 +69,14 @@
 		 if($result->num_rows>0)//when db records are found store in associative array...
         {
 		  // output data of each row
-    
+      $rownum=0;
+       echo "<table class='container tabl'  border='1px' >";
+      echo "<th colspan='8' style='border-bottom:solid 1px;'> <h3 align='center'><b>        <h3 align='center'>The services requested</h3>
+      </b></h3></th>";   
   echo '<div class="row"> ';
 	  while($row = $result->fetch_assoc())
 	   {
-
+$rownum+=1;
         $sql="SELECT * FROM `worker` where `worker_id`=".$row['worker_id'];
         $result1 =$conn->query($sql);
         if($result->num_rows>0)//when db records are found store in associative array...
@@ -84,23 +86,24 @@
           $contact=$row1['phone'];
         
         }}
-     
-  echo '<div class="col-md-4">   <div class="card m-5" style="width: 18rem;">
-      <div class="card-body">
-      <h6 class="text-disabled" id="btns">'.$row['status'].'</h6>
-        <h5 class="card-title">'.$cust_name.'</h5>
-       <img src="icon.png" width="30px" height="30px"/><a href="tel:'.$contact.'" class="card-link"> '.$contact.'</a>
+        echo "<tr>";
+        echo "<td>".$rownum."</td>";
+  echo '<div class="col-md-4">   <div class=" -5" style="width: 18rem;">
+      <div class="-body">
+     <td> <h6 class="text-disabled" id="btns">'.$row['status'].'</h6></td>
+     <td>   <h5 class="card-title">'.$cust_name.'</h5></td>
+     <td>  <img src="icon.png" width="30px" height="30px"/><a href="tel:'.$contact.'" class="card-link"> '.$contact.'</a></td>
        
-        <h6 class="card-title">Work requested is </h6>
-        <p class="card-text">'.$row['description'].'</p>
+        <td>   <p class="card-text">'.$row['description'].'</p></td>
 
-        <h6 class="card-title"> was requested on '.$row['request_date'].'</h6>
+        <td>  <h6 class="card-title"> was requested on '.$row['request_date'].'</h6></td>
       </div>
-        <button onclick="update('.$row['request_id'].')" type="submit" class="btn btn-danger my-2">Delete request</button>  
-      </div>
-    </div>';
+      <td>    <button onclick="update('.$row['request_id'].')" type="submit" class="btn btn-danger my-2">Delete request</button>  
+      </div> </td>
+    </div>';       echo "</tr>";
+
 	   }
-    echo "</div>";
+    echo "</div><table>";
     }
 
    

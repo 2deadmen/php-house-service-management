@@ -77,7 +77,7 @@ $_SESSION['cust_id']='admin';
     {
       // output data of each row
 $total=0;
-echo '<div class="row"> ';
+echo '<div class="row my-4" style="margin-left:300px"> ';
   while($row = $result->fetch_assoc())
    {
     $total=$total+1;
@@ -116,7 +116,37 @@ $total=0;
 </div>';
 echo '</div> ';
 }
-echo "<h2 align='center'  class='my-5'  ><b>WORKERS DETAILS</b></h2>";
+?>
+
+<div class="container ">
+     <div>
+     <button style='float:right' class='btn  btn-primary'>search</button><input  placeholder='search here...' type="search" id="form1" class=" w-50  form-control mx-2" onkeyup='search()' style='float:right' /> 
+   
+   <div id='hint'></div>
+   
+     </div>
+     <script>
+       function search(){
+         let str=document.getElementById('form1').value
+         if(str==""){
+             document.getElementById('hint').innerHTML=""
+             exit()
+           }
+         var xmlhttp = new XMLHttpRequest();
+           xmlhttp.onreadystatechange = function() 
+           {
+               if (this.readyState == 4 && this.status == 200) 
+               {
+                   document.getElementById("hint").innerHTML = this.responseText;
+               }
+           };
+           xmlhttp.open("GET", "searchadmin.php?q=" + str, true);
+           xmlhttp.send();
+       }
+     </script>
+   
+   </div>
+<?php
 //all workers
 
 $sql1="SELECT * FROM `worker` ";
@@ -124,10 +154,14 @@ $result = $conn->query($sql1);
 if($result->num_rows>0)//when db records are found store in associative array...
    {
  // output data of each row
+ $rownum=0;
+ echo "<table class='container tabl my-3'  border='1px' >";
+echo "<th colspan='8' style='border-bottom:solid 1px;'> <h3 align='center'><b>WORKERS DETAILS</b></h3></th>";   
 
-echo '<div class="row"> ';
 while($row = $result->fetch_assoc())
 {
+  $rownum+=1;
+
  $sql="SELECT `ratings` FROM `rating_table` where `customer_id`=".$row['worker_id'];
  $result1 =$conn->query($sql);
  $count=0;
@@ -148,32 +182,33 @@ else{
  $star="no reviews yet";
 }
 }
-echo '<div class="col-md-4">   <div class="card m-5" style="width: 18rem;">
-<div class="card-body">
-<h5 class="card-title">'.$row['worker_name'].'</h5>
-<h6  style="color:#D7BE69" class="card-subtitle mb-2 ">'.$star.' </h6>
-<h6 class="card-subtitle mb-2 text-muted">'.$row['worker_exp'].' years experience</h6>
-<p class="card-text">'.$row['worker_expertise'].'</p>
-<img src="icon.png" width="30px" height="30px"/><a href="tel:'.$row['phone'].'" class="card-link"> '.$row['phone'].'</a>
-<br>';
+echo "<tr>";
+   echo "<td>".$rownum."</td>";
+echo '
+<td><h5 class="card-title">'.$row['worker_name'].'</h5></td>
+<td><h6  style="color:#D7BE69" class="card-subtitle  ">'.$star.' </h6></td>
+<td><h6 class="card-subtitle mb-2 text-muted">'.$row['worker_exp'].' years experience</h6></td>
+<td><p class="card-text">'.$row['worker_expertise'].'</p></td>
+<td class="phone"><img src="icon.png" width="30px" height="30px"/><a href="tel:'.$row['phone'].'" class="card-link"> '.$row['phone'].'</a></td>
+';
 if(!isset($_SESSION['worker']))
 { 
-echo '<small><form action="rate.php" method="post">
+echo '<small><td><form action="rate.php" method="post">
 <input name="id" value='.$row['worker_id'].' style="display:none">
 <input type="submit" name="submit" value="Rate this worker" class="btn-primary btn my-2">
-</form>
-<form name="deleteu" action="delete.php" method="post">
+</form></td>
+<td><form name="deleteu" action="delete.php" method="post">
 <input name="w_id" value='.$row['worker_id'].' style="display:none">
 
-<input type="button" onclick="cdelete()" name="submit1" value="DELETE WORKER" class="btn-danger btn my-2">
+<input type="button" onclick="cdelete()" name="submit1" value="DELETE WORKER" class="btn-danger btn my-2"></td>
 </form></small>';
 }
 
 echo '  
 </div></div>
-</div>';
+</div>';  echo "</tr>";
 }
-echo "</div>";
+echo "</div></table>";
 }
 
    
