@@ -45,15 +45,26 @@ session_start();
     <input type="password"  onkeyup='passwordChanged()' maxlength='15' onblur='removestyle()' required class="form-control" name='password' minlength='8'  id='pass' placeholder="Password">
     <small id='strength'></small>
     <p id='StrengthDisp'></p>
+    <label for="psw-repeat">Repeat Password</label>
+    <input type="password" class="form-control" placeholder="Repeat Password" name="psw-repeat" required id="psw-repeat">
     <input type="checkbox" onclick='handleshowpass()'/>show password
   </div>
  
   
-  <input name='submit' type='submit' value='submit'  class="btn btn-primary">
+  <input name='submit' type='submit'  onclick='check()' value='submit'  class="btn btn-primary">
 
 </form></div>
 
 <div class="container">  <br> <br><small class='btn btn-primary my-2'><a  style='color:white' href="register.php">are you a customer?register here</a></small><br><small class='btn btn-primary'><a style='color:white'  href="worker_login.php">already have an account?</a></small></div></div>
+<script>
+  function check(){
+    if(document.getElementById('pass').value!==document.getElementById('psw-repeat').value){
+      
+      alert('passwords do not match')
+event.preventDefault()
+    }
+  }
+</script>
 <script language="javascript">
     function passwordChanged() {
         var strength = document.getElementById('strength');
@@ -86,19 +97,18 @@ session_start();
   }
  
 
-    function handleshowpass(){
+  function handleshowpass(){
   var x = document.getElementById("pass");
-  
+  var x1=document.getElementById("psw-repeat");
   if(x.type==="password"){
     x.type="text";
-  
+    x1.type="text";
   }
   else{
     x.type="password";
-  
+    x1.type="password";
   }
   }
-
 </script>
 
 <?php

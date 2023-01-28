@@ -163,11 +163,11 @@ while($row = $result->fetch_assoc())
   $rownum+=1;
 
  $sql="SELECT `ratings` FROM `rating_table` where `customer_id`=".$row['worker_id'];
- $result1 =$conn->query($sql);
+ $result1 = $conn->query($sql);
  $count=0;
  $sum=0;
  $star=0;
- if($result->num_rows>0)//when db records are found store in associative array...
+ if($result1->num_rows>0)//when db records are found store in associative array...
    {
  while($row1= $result1->fetch_assoc()){
    $sum+=$row1['ratings'];

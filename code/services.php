@@ -72,9 +72,8 @@
      echo "<th colspan='10' style='border-bottom:solid 1px;'> <h3 align='center'><b>  <h3 align='center'>The Services requested</h3></b></h3></th>";   
     echo '<div class="row"> ';
 	  while($row = $result->fetch_assoc())
-	   {      $rownum+=1;
-
-
+	   {     
+       $rownum+=1;
         $sql="SELECT * FROM `customer` where `customer_id`=".$row['customer_id'];
         $result1 =$conn->query($sql);
         if($result->num_rows>0)//when db records are found store in associative array...
@@ -107,8 +106,6 @@
 	   }
     echo "</div><table>";
     }
-
-   
         ?>
         <script>
              function update(state,r_id){
